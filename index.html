@@ -1,10 +1,39 @@
+# Create an updated index.html file with debugging for the chatbot script
 
+debug_html_content = """
 <!DOCTYPE html>
 <html>
-<head>
-  <title>WotNot Chatbot</title>
-</head>
-<body>
-  <script src="https://app.wotnot.io/chat-widget/6JznEa7LAzYg0313124069577UcVdPtp.js" defer></script>
-</body>
+  <head>
+    <title>WotNot Chatbot</title>
+  </head>
+  <body>
+    <h3 style="text-align: center;">Loading chatbot...</h3>
+    <script>
+      console.log("Injecting WotNot chatbot script...");
+
+      var script = document.createElement('script');
+      script.src = "https://app.wotnot.io/chat-widget/6JznEa7LAzYg0313124069577UcVdPtp.js";
+      script.defer = true;
+
+      script.onload = function() {
+        console.log("WotNot chatbot loaded successfully!");
+      };
+
+      script.onerror = function() {
+        console.error("Failed to load the chatbot script.");
+        document.body.innerHTML += "<p style='color:red;text-align:center;'>Chatbot script failed to load.</p>";
+      };
+
+      document.body.appendChild(script);
+    </script>
+  </body>
 </html>
+"""
+
+# Save this debug version to a file
+debug_file_path = "/mnt/data/index_debug.html"
+with open(debug_file_path, "w") as f:
+    f.write(debug_html_content)
+
+debug_file_path
+
